@@ -5,15 +5,13 @@
  */
 package entitie;
 
-import java.sql.Date;
-
 /**
  *
  * @author ACER EXTENSA 15
  */
 public class User {
     private int id_user;
-    private String Nom , Prenom ,Adress, Login , Password,Role,date_naiss ;
+    private String Nom , Prenom ,Adress, Login , Password,Role,date_naiss;
 
     public User(int id_user, String Nom, String Prenom, String Adress, String Login, String Password, String Role, String date_naiss) {
         this.id_user = id_user;
@@ -37,7 +35,7 @@ public class User {
     }
 
     public User() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId_user() {
@@ -108,6 +106,10 @@ public class User {
     public String toString() {
         return "User{" + "id_user=" + id_user + ", Nom=" + Nom + ", Prenom=" + Prenom + ", Adress=" + Adress + ", Login=" + Login + ", Password=" + Password + ", Role=" + Role + ", date_naiss=" + date_naiss + '}';
     }
+
+    
+
+    
 
    
     

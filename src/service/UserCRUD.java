@@ -73,7 +73,7 @@ public class UserCRUD {
     }
      public void supprimerUser(){
              try {
-            String requete3 = "DELETE FROM user WHERE id='14'";
+            String requete3 = "DELETE FROM user WHERE id=?";
             Statement st = new MyDB().getConnection().createStatement();
             st.executeUpdate(requete3);
             System.out.println("user supprimer avec succés");

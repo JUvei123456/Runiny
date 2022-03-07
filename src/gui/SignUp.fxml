@@ -4,7 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -61,30 +63,21 @@
          </children>
       </HBox>
       <HBox prefHeight="37.0" prefWidth="480.0">
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="20.0" />
+         </VBox.margin>
          <children>
-            <TextField fx:id="tfRole" promptText="Role" styleClass="tf_box" HBox.hgrow="ALWAYS">
+            <TextField fx:id="tfEmail" promptText="USERNAME" styleClass="tf_box" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </TextField>
          </children>
-         <VBox.margin>
-            <Insets left="15.0" right="15.0" top="20.0" />
-         </VBox.margin>
       </HBox>
       <HBox prefHeight="37.0" prefWidth="480.0">
-         <children>
-            <TextField fx:id="tfEmail" promptText="EMAIL" styleClass="tf_box" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets top="5.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
          <VBox.margin>
             <Insets left="15.0" right="15.0" />
          </VBox.margin>
-      </HBox>
-      <HBox prefHeight="45.0" prefWidth="480.0">
          <children>
             <PasswordField fx:id="tfPwd" promptText="PASSWORD" styleClass="tf_box" HBox.hgrow="ALWAYS">
                <HBox.margin>
@@ -92,16 +85,51 @@
                </HBox.margin>
             </PasswordField>
          </children>
-         <VBox.margin>
-            <Insets left="15.0" right="15.0" />
-         </VBox.margin>
       </HBox>
+      <HBox prefHeight="45.0" prefWidth="480.0">
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="5.0" />
+         </VBox.margin>
+         <children>
+            <RadioButton fx:id="rclient" mnemonicParsing="false" onAction="#getrole" selected="true" styleClass="radio" text="Client">
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" top="5.0" />
+               </HBox.margin>
+               <toggleGroup>
+                  <ToggleGroup fx:id="Rolee" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="radmin" mnemonicParsing="false" onAction="#getrole" styleClass="radio" text="Admin" toggleGroup="$Rolee">
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" top="5.0" />
+               </HBox.margin>
+            </RadioButton>
+            <RadioButton fx:id="rcoach" mnemonicParsing="false" onAction="#getrole" styleClass="radio" text="Coach" toggleGroup="$Rolee">
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" top="5.0" />
+               </HBox.margin>
+            </RadioButton>
+            <Label fx:id="tfRole" prefHeight="18.0" prefWidth="125.0" styleClass="tfrole">
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <Label fx:id="errorlab" prefHeight="22.0" prefWidth="253.0" styleClass="errorlab">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="140.0" right="20.0" top="5.0" />
+         </VBox.margin>
+      </Label>
       <Button fx:id="btnajouter" mnemonicParsing="false" onAction="#ajouterUser" prefHeight="43.0" prefWidth="560.0" styleClass="blue-btn" text="Sign UP" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>
          <VBox.margin>
-            <Insets left="15.0" right="15.0" top="20.0" />
+            <Insets left="15.0" right="15.0" top="5.0" />
          </VBox.margin>
       </Button>
    </children>

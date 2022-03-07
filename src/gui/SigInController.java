@@ -59,7 +59,7 @@ public class SigInController implements Initializable {
             String Password = tfpwd.getText();
             
             if(Login.isEmpty() || Password.isEmpty()){
-               errorlab.setText("Please insert username and password");
+               errorlab.setText("Please insert Login and password");
             }
             else{
                   String requete = ("select * from user where Login=?"
@@ -76,6 +76,9 @@ public class SigInController implements Initializable {
                 window.setScene(scene3);
                 window.show();
                 }
+                else{
+                    errorlab.setText(" Login or password is wrong");
+                }
             }
             }
         catch(Exception ex){
@@ -90,16 +93,9 @@ public class SigInController implements Initializable {
                 Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
                 window.setScene(scene3);
                 window.show();
+    
+       
     }
 
-    private static class errorMsg {
-
-        private static void setText(String please_insert_username_and_password) {
-          // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        public errorMsg() {
-        }
-    }
 }
- 
+  

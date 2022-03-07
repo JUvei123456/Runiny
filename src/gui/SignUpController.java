@@ -5,17 +5,25 @@
  */
 package gui;
 
+import gui.EnvoyerEmail;
 import entitie.User;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import service.UserCRUD;
+import utils.MyDB;
 
 /**
  * FXML Controller class
@@ -33,13 +41,23 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField tfDn;
     @FXML
-    private TextField tfRole;
+    private Label tfRole;
     @FXML
     private TextField tfEmail;
     @FXML
     private PasswordField tfPwd;
     @FXML
     private Button btnajouter;
+    @FXML
+    private RadioButton rclient;
+    @FXML
+    private RadioButton radmin;
+    @FXML
+    private RadioButton rcoach;
+    @FXML
+    private ToggleGroup Rolee;
+    @FXML
+    private Label errorlab;
 
     /**
      * Initializes the controller class.
@@ -49,18 +67,60 @@ public class SignUpController implements Initializable {
         // TODO
     }    
 
+     @FXML
+    private void getrole(ActionEvent event) {
+        if (rclient.isSelected()){
+            tfRole.setText(rclient.getText());
+        }
+        else if(radmin.isSelected()){
+            tfRole.setText(radmin.getText());
+        }
+        else if(rcoach.isSelected()){
+       tfRole.setText(rcoach.getText());
+    }
+        String Role = tfRole.getText();
+    }
+    
+    
     @FXML
-    private void ajouterUser(ActionEvent event) {
+    private void ajouterUser(ActionEvent event) throws SQLException {
         String Nom = tfNom.getText();
         String Prenom = tfPrenom.getText();
         String Adress = tfAdress.getText();
         String Date_naiss=tfDn.getText();
         String Role = tfRole.getText();
-        String Email = tfEmail.getText();
+        String Login = tfEmail.getText();
         String Password = tfPwd.getText();
-        User u = new User(Nom,Prenom,Adress,Email,Password,Role,Date_naiss);
+        if(Login.isEmpty() || Password.isEmpty() || Nom.isEmpty() || Prenom.isEmpty() || Adress.isEmpty()|| Date_naiss.isEmpty() ){
+               errorlab.setText("Please complete all the fills");
+            }
+        else if(Login.charAt(0)!='@'&& Login.contains("@") && Login.endsWith(".com") || Login.endsWith(".tn") || Login.endsWith(".fr")) {
+            errorlab.setText("Please enter a valide email");
+              if (Password.length()<8 ){
+                   errorlab.setText("Password is too weak, please choose atleast 8 characters");
+               }
+               else{
+         String requete = ("select * from user where Login=?");
+           PreparedStatement pst = new MyDB().getConnection().prepareStatement(requete);
+            pst.setString(1, Login);
+            
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                errorlab.setText("Username already taken, please try another username");
+            } 
+        User u = new User(Nom,Prenom,Adress,Login,Password,Role,Date_naiss);
         UserCRUD ud = new UserCRUD();
         ud.ajouterUser2(u);
+              }
+              EnvoyerEmail test = new EnvoyerEmail();
+              test.envoyer();
+              
+        
     }
+
+   
     
 }
+}
+            
+            
